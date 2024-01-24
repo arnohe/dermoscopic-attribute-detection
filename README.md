@@ -1,1 +1,1 @@
-# dermoscopic-attributes-detection
+# dermoscopic-attribute-detection
