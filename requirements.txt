@@ -9,3 +9,4 @@ tensorflow
 matplotlib
 scikit-image
 opencv-python
+keras-unet-collection
