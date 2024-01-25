@@ -1,4 +1,5 @@
 from keras_unet_collection.models import unet_2d
+from keras_unet_collection import _backbone_zoo
 import tensorflow as tf
 import numpy as np
 import wandb
@@ -70,6 +71,7 @@ def create_unet_model(config):
     """
     create keras model using keras_unet_collection
     """
+    edit_backbone_zoo(config["backbone"])
     model = unet_2d(
         input_size=(config["input_size"], config["input_size"], 3),
         filter_num=get_num_filters(config["unet_depth"], config["decoder_scale"]),
@@ -86,6 +88,38 @@ def create_unet_model(config):
         name='unet_2d'
     )
     return model
+
+
+def edit_backbone_zoo(backbone):
+    """
+    Add support for EfficientNetV2 to keras_unet_collection
+    """
+    if backbone in _backbone_zoo.layer_cadidates.keys():
+        return
+
+    new_backbones = {
+        'EfficientNetV2B0': (
+            'block1a_project_activation', 'block2b_expand_activation', 'block4a_expand_activation',
+            'block6a_expand_activation', 'top_activation'),
+        'EfficientNetV2B1': (
+            'block1b_project_activation', 'block2c_expand_activation', 'block4a_expand_activation',
+            'block6a_expand_activation', 'top_activation'),
+        'EfficientNetV2B2': (
+            'block1b_project_activation', 'block2c_expand_activation', 'block4a_expand_activation',
+            'block6a_expand_activation', 'top_activation'),
+        'EfficientNetV2B3': (
+            'block1b_project_activation', 'block2c_expand_activation', 'block4a_expand_activation',
+            'block6a_expand_activation', 'top_activation'),
+        'EfficientNetV2S': (
+            'block1b_project_activation', 'block2d_expand_activation', 'block4a_expand_activation',
+            'block6a_expand_activation', 'top_activation'),
+        'EfficientNetV2M': (
+            'block1c_project_activation', 'block2e_expand_activation', 'block4a_expand_activation',
+            'block6a_expand_activation', 'top_activation'),
+        'EfficientNetV2L': (
+            'block1d_project_activation', 'block2g_expand_activation', 'block4a_expand_activation',
+            'block6a_expand_activation', 'top_activation')}
+    _backbone_zoo.layer_cadidates = _backbone_zoo.layer_cadidates | new_backbones
 
 
 def create_train_dataset(config):
