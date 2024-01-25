@@ -1,0 +1,11 @@
+tqdm
+numpy
+keras
+wandb
+imgaug
+pillow
+pandas
+tensorflow
+matplotlib
+scikit-image
+opencv-python
