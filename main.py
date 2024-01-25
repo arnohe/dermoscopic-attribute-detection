@@ -22,17 +22,11 @@ def preprocess_main():
 def sweep_main():
     input_size = 512
     batch_size = 28
-    # list_alpha_gamma = list(product([0.5, 0.6, 0.7, 0.8], [1.0 / 3.0, 0.5, 0.75, 1]))
-    # search(input_size, batch_size, "binary_focal_loss", list_alpha_gamma)
-
-    list_alpha_gamma = list(product([0.5], [1.0]))
+    list_alpha_gamma = list(product([0.5, 0.6, 0.7, 0.8], [1.0 / 3.0, 0.5, 0.75, 1]))
     search(input_size, batch_size, "binary_focal_loss", list_alpha_gamma)
 
-    # list_alpha_gamma = list(product([0.5, 0.6, 0.7, 0.8], [0.25, 0.5, 0.75, 1]))
-    # search(input_size, batch_size, "focal_tversky_loss", list_alpha_gamma)
-
-    # list_alpha_gamma = list(product([0.5, 0.6, 0.7, 0.8], [None]))
-    # search(input_size, batch_size, "log_cosh_tversky_loss", list_alpha_gamma)
+    list_alpha_gamma = list(product([0.5, 0.6, 0.7, 0.8], [0.25, 0.5, 0.75, 1]))
+    search(input_size, batch_size, "focal_tversky_loss", list_alpha_gamma)
 
 
 def training_main():
