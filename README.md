@@ -10,5 +10,10 @@ First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-contai
 
 Build the docker container
 ```
-docker build -t dermoscopic-attribute-detection .
+docker build -t dermo-attributes .
+```
+
+Run the docker container
+```
+docker run dermo-attributes
 ```
