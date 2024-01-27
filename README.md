@@ -11,6 +11,10 @@ Download the dataset
 ```
 python main.py download
 ```
+Preprocess the images to a fixed size (Add `--help` for further options)
+```
+python main.py preprocess
+```
 
 ## To use the docker setup
 
