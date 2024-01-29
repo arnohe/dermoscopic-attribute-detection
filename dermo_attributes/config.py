@@ -23,6 +23,7 @@ def preprocess_arguments():
 def training_arguments():
     parser = ArgumentParser(description='Train UNet model')
 
+    parser.add_argument('train')
     parser.add_argument('-d', '--disable_wandb',
                         action='store_true', help='override wandb usage')
     parser.add_argument('-t', '--tensorboard',
