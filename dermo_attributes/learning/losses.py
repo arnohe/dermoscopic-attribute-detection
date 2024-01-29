@@ -20,8 +20,8 @@ def binary_focal_loss(alpha=0.25, gamma=2.):
         y_p = bk.cast(bk.flatten(y_pred), dtype="float32")
         y_p = bk.clip(y_p, bk.epsilon(), 1.0 - bk.epsilon())
 
-        loss_0 = - y_t * (a * bk.pow(1 - y_p, b) * bk.log(y_p))
-        loss_1 = - (1 - y_t) * ((1 - a) * bk.pow(y_p, b) * bk.log(1 - y_p))
+        loss_0 = - y_t * (a * bk.pow(1 - y_p, (1 - b)) * bk.log(y_p))
+        loss_1 = - (1 - y_t) * ((1 - a) * bk.pow(y_p, (1 - b)) * bk.log(1 - y_p))
         return bk.mean(loss_0 + loss_1)
 
     return loss
