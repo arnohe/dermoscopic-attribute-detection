@@ -1,10 +1,14 @@
 import os
 from argparse import ArgumentParser
 
+WANDB_PROJECT = "dermoscopic-attribute-detection"
+WANDB_USER = "arno"
 BASE_FOLDER = os.getenv('BASE_FOLDER', "data")  # points to where data is stored (if in a different location)
+
 ATTRIBUTE_NAMES = ["globules", "milia_like_cyst", "negative_network", "pigment_network", "streaks"]
 NUM_ATTRIBUTES = len(ATTRIBUTE_NAMES)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = "3"
+
 
 """
 arguments for preprocessing and training can be set from the command line
