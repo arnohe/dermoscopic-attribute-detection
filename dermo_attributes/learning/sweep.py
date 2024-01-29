@@ -17,7 +17,7 @@ def search(input_size, batch_size, loss, list_alpha_gamma):
     """
     list_attributes = [[k] for k in range(5)]
     list_balanced_batches = [False, True]
-    total = "/" + str(len(list_alpha_gamma) * len(list_attributes) * len(list_balanced_batches))
+    total = str(len(list_alpha_gamma) * len(list_attributes) * len(list_balanced_batches))
     for i, params in enumerate(product(list_attributes, list_alpha_gamma, list_balanced_batches)):
         attributes, alpha_gamma, balanced_batches = params
         alpha, gamma = alpha_gamma
@@ -34,13 +34,14 @@ def start_run(i, total, attributes, balanced_batches, loss, input_size, batch_si
     if gamma is not None:
         alpha_gamma_str += "   " + format(gamma, '.2f')
 
-    print((str(i + 1) + total).rjust(7) + "  >> ",
+    print((str(i + 1) + "/" + str(total)).rjust(7) + "  >> ",
           str(attributes).rjust(25) + "  ",
           str(balanced_batches).ljust(5) + "  ",
           loss.ljust(21), alpha_gamma_str,
           end="  ", flush=True)
 
-    args = ['python', 'sweep.py']
+    args = ['python', 'main.py']
+    args += ["train"]
     args += ["--input_size", str(input_size)]
     args += ["--batch_size", str(batch_size)]
     args += ["--attributes", *[str(a) for a in attributes]]
