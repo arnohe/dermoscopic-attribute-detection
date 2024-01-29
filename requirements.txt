@@ -5,6 +5,7 @@ wandb
 imgaug
 pillow
 pandas
+requests
 tensorflow
 matplotlib
 scikit-image
