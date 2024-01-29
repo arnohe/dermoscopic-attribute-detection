@@ -22,6 +22,11 @@ def preprocess_dataset():
     process_all(args["dataset_name"], args["size"])
 
 
+def train_model():
+    config = training_config()
+    train_unet(config)
+
+
 def sweep_gridsearch():
     input_size = 512
     batch_size = 28
@@ -30,11 +35,6 @@ def sweep_gridsearch():
 
     list_alpha_gamma = list(product([0.5, 0.6, 0.7, 0.8], [0.25, 0.5, 0.75, 1]))
     search(input_size, batch_size, "focal_tversky_loss", list_alpha_gamma)
-
-
-def train_model():
-    config = training_config()
-    train_unet(config)
 
 
 # def image_main():
