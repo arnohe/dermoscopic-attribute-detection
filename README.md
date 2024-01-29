@@ -20,7 +20,7 @@ Configure the wandb project in dermo_attributes/config.py
 ```
 python main.py train
 ```
-Run a gridsearch sweep to test the parameters (See `--help for all the parameters)
+Run a gridsearch sweep to test the parameters (See `--help` for all the parameters)
 ```
 python main.py sweep
 ```
