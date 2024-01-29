@@ -1,7 +1,7 @@
 from itertools import product
 import sys
 
-from dermo_attributes.config import preprocess_arguments, training_config
+from dermo_attributes.config import preprocess_arguments, training_config, sweep_config
 from dermo_attributes.io.class_id import read_training_splits
 from dermo_attributes.io.paths import create_new_processed_folders
 from dermo_attributes.io.preprocess import process_all
@@ -17,9 +17,10 @@ def download_dataset():
 
 def preprocess_dataset():
     args = preprocess_arguments()
-    create_new_processed_folders(args["dataset_name"])
-    read_training_splits(args["dataset_name"])
-    process_all(args["dataset_name"], args["size"])
+    dataset_name = "crop_" + args["size"]
+    create_new_processed_folders(dataset_name)
+    read_training_splits(dataset_name)
+    process_all(dataset_name, args["size"])
 
 
 def train_model():
@@ -28,13 +29,8 @@ def train_model():
 
 
 def sweep_gridsearch():
-    input_size = 512
-    batch_size = 28
-    list_alpha_gamma = list(product([0.5, 0.6, 0.7, 0.8], [1.0 / 3.0, 0.5, 0.75, 1]))
-    search(input_size, batch_size, "binary_focal_loss", list_alpha_gamma)
-
-    list_alpha_gamma = list(product([0.5, 0.6, 0.7, 0.8], [0.25, 0.5, 0.75, 1]))
-    search(input_size, batch_size, "focal_tversky_loss", list_alpha_gamma)
+    config = sweep_config()
+    search(config)
 
 
 # def image_main():
