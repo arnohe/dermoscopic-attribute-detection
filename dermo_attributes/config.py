@@ -14,8 +14,9 @@ or by changing the default values here
 
 def preprocess_arguments():
     parser = ArgumentParser(description='Process images from ISIC dataset')
+    parser.add_argument('preprocess')
     parser.add_argument('--size', type=int, help='Size for resizing images', default=512)
-    parser.add_argument('--dataset_name', type=str, help='Folder name for processed dataset', default="crop_512")
+    parser.add_argument('--dataset_name', type=str, help='Name for the new processed dataset', default="crop_512")
     return vars(parser.parse_args())
 
 
