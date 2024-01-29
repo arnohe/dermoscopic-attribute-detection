@@ -9,6 +9,7 @@ from dermo_attributes.io.paths import Splits
 from dermo_attributes.io.dataset import get_dataset
 from dermo_attributes.learning.metrics import SegmentationMetric
 from dermo_attributes.learning.losses import binary_focal_loss, focal_tversky_loss, log_cosh_tversky_loss
+from dermo_attributes.config import WANDB_USER, WANDB_PROJECT
 
 
 def train_unet(config, fine_tune_run_name=None):
@@ -42,7 +43,7 @@ def train_unet(config, fine_tune_run_name=None):
     # train model
     if not config["disable_wandb"]:
         run = wandb.init(mode="online",
-                         project="lesion-attributes",
+                         project=WANDB_PROJECT,
                          config=config,
                          save_code=True,
                          job_type=job_type,
@@ -249,7 +250,7 @@ def load_model(wandb_model_name):
     file_name = 'data/models/' + wandb_model_name + '.h5'
     if not os.path.exists(file_name):
         api = wandb.Api()
-        artifact = api.artifact("arno/lesion-attributes/" + wandb_model_name + ":v0")
+        artifact = api.artifact(WANDB_USER + "/" + WANDB_PROJECT + "/" + wandb_model_name + ":v0")
         artifact.download(".")
         os.rename("model.h5", file_name)
     model = tf.keras.models.load_model(file_name,
