@@ -33,7 +33,7 @@ python main.py download
 ```
 Preprocess the images to a fixed size
 ```
-python main.py preprocess --size 384
+python main.py preprocess --size 512
 ```
 Use --size to set the width
 
