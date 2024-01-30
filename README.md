@@ -14,17 +14,17 @@ Download the dataset
 ```
 python main.py download
 ```
-Preprocess the images to a fixed size (Add `--help` for further options)
+Preprocess the images to a fixed size (Add --help for further options)
 ```
 python main.py preprocess
 ```
 Configure the wandb project in dermo_attributes/config.py
 
-Train a model (Add `--help` to list the parameters)
+Train a model (Add --help to list the parameters)
 ```
 python main.py train
 ```
-Run a gridsearch sweep to test the parameters (Add `--help` to list the parameters)
+Run a gridsearch sweep to test the parameters (Add --help to list the parameters)
 ```
 python main.py sweep
 ```
@@ -48,4 +48,4 @@ Run the docker container interactively
 ```
 docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti dermo-attributes
 ```
-Now you can run main.py from the `dermoscopic-attribute-detection` directory
+Now you can run main.py from the dermoscopic-attribute-detection directory
