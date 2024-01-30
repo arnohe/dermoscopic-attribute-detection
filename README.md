@@ -1,25 +1,62 @@
-# dermoscopic-attribute-detection
+# Machine-learning-based detection of dermoscopic attributes
 Author: Arno Heirman
 
-Master's thesis: https://lib.ugent.be/catalog/rug01:003150464
+## Project information
+Author: Arno Heirman
 
-To ensure compatiblity the project can be run using the NVIDIA container image of TensorFlow\
-Alternativly project can be run directly (see requirements.txt for compatibility)
+This repository contains the code related to my [Master's thesis](https://lib.ugent.be/catalog/rug01:003150464) and can be used to reproduce my results.\
+This project is based on the data from the [ISIC 2018](https://challenge.isic-archive.com/landing/2018/46/) competition.
 
-# Instructions
+The goal is the detection of certain structures in dermoscopic images, with the aim of aiding in the diagnosis of melanoma.\
+This is achieved through machine learning using a UNet-architecture with a compact encoder to segment the structures.\
+The main challenges are related to problems with the labelled dataset, including heavy data imbalance.\
+To address this two families of loss functions and an oversampling technique are evaluated.
 
-## Run directly
+The following image is an example of the model output for the five different structures from left to right.\
+The middle row shows a heatmap of the raw model output.\
+The top and bottom row show a comparison of the produced segmentation masks to the ground truth.
+<p align="center">
+<img src="https://github.com/arnohe/arnohe.github.io/blob/main/thesis_BFL_output.png?raw=true" width="800">
+</p>
 
+
+
+## Instructions
+
+### Initial setup
+First install the python packages
+```
+pip install -r requirements.txt 
+```
 Download the dataset
 ```
 python main.py download
 ```
-Preprocess the images to a fixed size (Add --help for further options)
+Preprocess the images to a fixed size
 ```
-python main.py preprocess
+python main.py preprocess --size 384
 ```
-Configure the wandb project in dermo_attributes/config.py
+Use --size to set the width
 
+### Container setup
+
+To ensure compatibility the project can be run using the NVIDIA container image of TensorFlow
+
+First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
+
+Next build the container with the Dockerfile
+```
+docker build -t dermo-attributes .
+```
+  
+Run the docker container interactively
+```
+docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti dermo-attributes
+```
+
+### Model training
+
+Configure the wandb project in dermo_attributes/config.py
 Train a model (Add --help to list the parameters)
 ```
 python main.py train
@@ -29,23 +66,3 @@ Run a gridsearch sweep to test the parameters (Add --help to list the parameters
 python main.py sweep
 ```
 
-## Container setup
-
-First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
-
-Next set up the datasets so they can be copied into the container
-```
-python main.py download
-python main.py preprocess
-```
-
-Build the container with the Dockerfile
-```
-docker build -t dermo-attributes .
-```
-  
-Run the docker container interactively
-```
-docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti dermo-attributes
-```
-Now you can run main.py from the dermoscopic-attribute-detection directory
