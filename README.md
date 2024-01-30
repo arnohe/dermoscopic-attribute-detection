@@ -2,7 +2,6 @@
 Author: Arno Heirman
 
 ## Project information
-Author: Arno Heirman
 
 This repository contains the code related to my [Master's thesis](https://lib.ugent.be/catalog/rug01:003150464) and can be used to reproduce my results.
 This project is based on the data from the [ISIC 2018](https://challenge.isic-archive.com/landing/2018/46/) competition.
