@@ -17,7 +17,7 @@ def download_dataset():
 
 def preprocess_dataset():
     args = preprocess_arguments()
-    dataset_name = "crop_" + args["size"]
+    dataset_name = "crop_" + str(args["size"])
     create_new_processed_folders(dataset_name)
     read_training_splits(dataset_name)
     process_all(dataset_name, args["size"])
