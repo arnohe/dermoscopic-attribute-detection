@@ -1,6 +1,7 @@
 from tqdm.contrib.concurrent import process_map
 from skimage.util import img_as_ubyte
 from itertools import repeat
+import multiprocessing as mp
 import numpy as np
 import cv2
 
@@ -24,7 +25,8 @@ def process_all(dataset_name, size):
     crop_data = []
     for split in list(Splits):
         ids = get_isic_split(split)
-        crop_data += process_map(process_one_crop, ids, repeat(size), repeat(dataset_name), repeat(split), chunksize=1)
+        crop_data += process_map(process_one_crop, ids, repeat(size), repeat(dataset_name), repeat(split), chunksize=1,
+                                 max_workers=mp.cpu_count() - 2)
 
     crop_data = {idx: data for idx, data in crop_data}
     save_crop_data(crop_data, dataset_name)
