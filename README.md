@@ -5,7 +5,7 @@ Master's thesis: https://lib.ugent.be/catalog/rug01:003150464
 
 # Instructions
 
-## Setting up the dataset
+## Run directly
 
 Download the dataset
 ```
@@ -26,7 +26,7 @@ Run a gridsearch sweep to test the parameters (Add `--help` to list the paramete
 python main.py sweep
 ```
 
-## To use the docker setup
+## Docker setup
 
 First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
 
