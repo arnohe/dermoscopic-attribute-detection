@@ -45,4 +45,4 @@ Run the docker container interactively
 ```
 docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti dermo-attributes
 ```
-Now you can run from main.py `dermoscopic-attribute-detection` directory.
+Now you can run main.py from the `dermoscopic-attribute-detection` directory.
