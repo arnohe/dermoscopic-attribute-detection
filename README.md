@@ -55,12 +55,12 @@ docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti
 
 ### Model training
 
-Configure the wandb project in dermo_attributes/config.py
+Configure the wandb project in dermo_attributes/config.py\
 Train a model (Add --help to list the parameters)
 ```
 python main.py train
 ```
-Run a gridsearch sweep to test the parameters (Add --help to list the parameters)
+Run a gridsearch sweep for loss parameters and oversampling method (Add --help to list the parameters)
 ```
 python main.py sweep
 ```
