@@ -4,16 +4,16 @@ Author: Arno Heirman
 ## Project information
 Author: Arno Heirman
 
-This repository contains the code related to my [Master's thesis](https://lib.ugent.be/catalog/rug01:003150464) and can be used to reproduce my results.\
+This repository contains the code related to my [Master's thesis](https://lib.ugent.be/catalog/rug01:003150464) and can be used to reproduce my results.
 This project is based on the data from the [ISIC 2018](https://challenge.isic-archive.com/landing/2018/46/) competition.
 
-The goal is the detection of certain structures in dermoscopic images, with the aim of aiding in the diagnosis of melanoma.\
-This is achieved through machine learning using a UNet-architecture with a compact encoder to segment the structures.\
-The main challenges are related to problems with the labelled dataset, including heavy data imbalance.\
+The goal is the detection of certain structures in dermoscopic images, with the aim of aiding in the diagnosis of melanoma.
+This is achieved through machine learning using a UNet-architecture with a compact encoder to segment the structures.
+The main challenges are related to problems with the labelled dataset, including heavy data imbalance.
 To address this two families of loss functions and an oversampling technique are evaluated.
 
-The following image is an example of the model output for the five different structures from left to right.\
-The middle row shows a heatmap of the raw model output.\
+The following image is an example of the model output for the five different structures from left to right.
+The middle row shows a heatmap of the raw model output.
 The top and bottom row show a comparison of the produced segmentation masks to the ground truth.
 <p align="center">
 <img src="https://github.com/arnohe/arnohe.github.io/blob/main/thesis_BFL_output.png?raw=true" width="800">
