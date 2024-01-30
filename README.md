@@ -33,7 +33,7 @@ python main.py sweep
 
 First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
 
-Next set up the datasets in `/data` so they can be copied into the container
+Next set up the datasets so they can be copied into the container
 ```
 python main.py download
 python main.py preprocess
