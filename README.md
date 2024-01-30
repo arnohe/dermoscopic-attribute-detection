@@ -17,11 +17,11 @@ python main.py preprocess
 ```
 Configure the wandb project in dermo_attributes/config.py
 
-Train a model (See `--help` for all the optional parameters)
+Train a model (Add `--help` to list the parameters)
 ```
 python main.py train
 ```
-Run a gridsearch sweep to test the parameters (See `--help` for all the parameters)
+Run a gridsearch sweep to test the parameters (Add `--help` to list the parameters)
 ```
 python main.py sweep
 ```
