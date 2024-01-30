@@ -15,8 +15,9 @@ Preprocess the images to a fixed size (Add `--help` for further options)
 ```
 python main.py preprocess
 ```
-Train a model (See `--help` for all the optional parameters)\
 Configure the wandb project in dermo_attributes/config.py
+
+Train a model (See `--help` for all the optional parameters)
 ```
 python main.py train
 ```
