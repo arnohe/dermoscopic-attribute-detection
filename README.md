@@ -1,4 +1,4 @@
-# Machine-learning-based detection of dermoscopic attributes
+# Detection of dermoscopic attributes
 Author: Arno Heirman
 
 ## Project information
