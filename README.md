@@ -30,7 +30,9 @@ python main.py sweep
 
 First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
 
-Build the docker container
+Build the docker container. This will:
+- install everything needed for compatibility
+- download and preprocess the dataset with size 384x384
 ```
 docker build -t dermo-attributes .
 ```
