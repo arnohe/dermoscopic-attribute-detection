@@ -33,14 +33,14 @@ python main.py sweep
 
 First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
 
-Build the container. \
-This will:
-- install everything needed for compatibility
-- download and preprocess the dataset with size 384x384
+Build the container
 ```
 docker build -t dermo-attributes .
 ```
-
+This will:
+- install everything needed for compatibility
+- download and preprocess the dataset with size 384x384
+  
 Run the docker container interactively
 ```
 docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti dermo-attributes
