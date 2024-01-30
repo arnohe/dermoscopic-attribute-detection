@@ -3,6 +3,9 @@ Author: Arno Heirman
 
 Master's thesis: https://lib.ugent.be/catalog/rug01:003150464
 
+To ensure compatiblity the project can be run using the NVIDIA container image of TensorFlow.\
+Alternativly project can be run directly (see requirements.txt for compatibility).
+
 # Instructions
 
 ## Run directly
@@ -26,11 +29,11 @@ Run a gridsearch sweep to test the parameters (Add `--help` to list the paramete
 python main.py sweep
 ```
 
-## Docker setup
+## Container setup
 
 First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
 
-Build the docker container. \
+Build the container. \
 This will:
 - install everything needed for compatibility
 - download and preprocess the dataset with size 384x384
@@ -42,3 +45,4 @@ Run the docker container interactively
 ```
 docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti dermo-attributes
 ```
+Then 
