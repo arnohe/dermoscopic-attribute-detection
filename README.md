@@ -33,7 +33,7 @@ python main.py sweep
 
 First install [nvidia-container-toolkit](https://github.com/NVIDIA/nvidia-container-toolkit)
 
-Build the container using docker buildx.
+Build the container with the Dockerfile.
 This will:
 - install everything needed for compatibility
 - download and preprocess the dataset with size 384x384
