@@ -247,7 +247,10 @@ def get_metrics(config):
 
 
 def load_model(wandb_model_name):
-    file_name = 'data/models/' + wandb_model_name + '.h5'
+    path = 'data/models'
+    file_name = path + '/' + wandb_model_name + '.h5'
+    if not os.path.exists(path):
+        os.mkdir(path)
     if not os.path.exists(file_name):
         api = wandb.Api()
         artifact = api.artifact(WANDB_USER + "/" + WANDB_PROJECT + "/" + wandb_model_name + ":v0")
