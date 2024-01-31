@@ -3,7 +3,6 @@ from argparse import ArgumentParser
 
 WANDB_PROJECT = "lesion-attributes"
 WANDB_USER = "arno"
-BASE_FOLDER = os.getenv('BASE_FOLDER', "data")  # points to where data is stored (if in a different location)
 
 ATTRIBUTE_NAMES = ["globules", "milia_like_cyst", "negative_network", "pigment_network", "streaks"]
 NUM_ATTRIBUTES = len(ATTRIBUTE_NAMES)

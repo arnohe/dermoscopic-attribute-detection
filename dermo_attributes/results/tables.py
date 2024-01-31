@@ -138,6 +138,8 @@ def get_raw_results():
             rows.append((run.id, *row_conf, metr[4:], float(run_results[metr][0])))
     df = pd.DataFrame.from_records(data=rows, columns=["id", *config[:-1], "attribute", "metric", "value"])
 
+    if not os.path.exists("data/results"):
+        os.mkdir("data/results")
     df.to_pickle("data/results/raw_results_dataframe.pkl")
     return df
 

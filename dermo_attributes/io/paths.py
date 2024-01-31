@@ -4,7 +4,7 @@ from enum import Enum
 import json
 import os
 
-from dermo_attributes.config import BASE_FOLDER, ATTRIBUTE_NAMES, NUM_ATTRIBUTES
+from dermo_attributes.config import ATTRIBUTE_NAMES, NUM_ATTRIBUTES
 
 """
 these functions return or create the folders where images are stored
@@ -64,7 +64,7 @@ def isic_path(split, datatype=None, isic_idx=None):
     if datatype in ATTRIBUTE_NAMES:
         datatype = Datatypes.GTX
 
-    folder = BASE_FOLDER + "/ISIC/" + split.value
+    folder = "data/ISIC/" + split.value
     if datatype is None:
         return folder
     folder += "/" + datatype.value
@@ -83,7 +83,7 @@ def processed_path(dataset_name, split=None, section=None, isic_idx=None):
     """
     if section == Datatypes.GTX:
         return [processed_path(dataset_name, split, k, isic_idx) for k in list(Datatypes)[-NUM_ATTRIBUTES:]]
-    folder = BASE_FOLDER + "/processed/" + dataset_name
+    folder = "data/processed/" + dataset_name
     if split is None:
         return folder
     folder += "/" + split.value
