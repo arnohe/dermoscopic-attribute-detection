@@ -5,6 +5,7 @@ Author: Arno Heirman
 
 This repository contains the code related to my [Master's thesis](https://lib.ugent.be/catalog/rug01:003150464) and can be used to reproduce my results.
 This project is based on the data from the [ISIC 2018](https://challenge.isic-archive.com/landing/2018/46/) competition.
+The project makes use of my [Weights & Biases project](https://wandb.ai/arno/lesion-attributes) to store runs and models.
 
 The goal is the detection of certain structures in dermoscopic images, with the aim of aiding in the diagnosis of melanoma.
 This is achieved through machine learning using a UNet-architecture with a compact encoder to segment the structures.
