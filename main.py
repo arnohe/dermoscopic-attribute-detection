@@ -43,8 +43,7 @@ def sweep_gridsearch():
 #
 def test_main():
     args = test_arguments()
-    result_1 = run_tests(args.idx)
-    print("Jaccard scores:", result_1)
+    print("Jaccard scores:", run_tests(args.idx))
 
 
 def table_main():
