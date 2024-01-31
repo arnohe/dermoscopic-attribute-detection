@@ -3,7 +3,7 @@ from itertools import product
 from time import time
 import wandb
 
-from dermo_attributes.config import ATTRIBUTE_NAMES
+from dermo_attributes.config import ATTRIBUTE_NAMES, WANDB_USER, WANDB_PROJECT
 from dermo_attributes.learning.training import train_unet
 
 """
@@ -82,7 +82,7 @@ def fine_tuning_runs():
     used to train models a second time with the encoder unfrozen
     """
     api = wandb.Api()
-    runs = api.runs(path="arno/lesion-attributes")
+    runs = api.runs(path=WANDB_USER + "/" + WANDB_PROJECT)
     # filters={"$and": [{"config.loss": "binary_focal_loss"},
     #                   {"config.attributes": [0]}]})
     for run in runs:

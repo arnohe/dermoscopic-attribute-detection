@@ -4,7 +4,7 @@ import numpy as np
 import wandb
 import os
 
-from dermo_attributes.config import ATTRIBUTE_NAMES
+from dermo_attributes.config import ATTRIBUTE_NAMES, WANDB_USER, WANDB_PROJECT
 
 """
 functions to tabulate and process the results
@@ -118,7 +118,7 @@ def get_raw_results():
         return pd.read_pickle("data/results/raw_results_dataframe.pkl")
 
     api = wandb.Api()
-    runs = api.runs("arno/lesion-attributes")
+    runs = api.runs(WANDB_USER + "/" + WANDB_PROJECT)
     metrics = ["val_" + j + "_" + i for i, j in product(["iou", "recall", "precision"], ["fuzzy", "crisp", "class"])]
     config = ["balanced_batches", "loss", "alpha", "gamma", "attribute_names"]
 

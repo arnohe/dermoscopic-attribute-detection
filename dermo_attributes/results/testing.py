@@ -11,7 +11,7 @@ from dermo_attributes.io.preprocess import read_crop_data
 from dermo_attributes.io.dataset import load_numpy_data, get_ids
 from dermo_attributes.io.images import threshold, get_isic_truth
 
-from dermo_attributes.config import ATTRIBUTE_NAMES
+from dermo_attributes.config import ATTRIBUTE_NAMES, WANDB_PROJECT, WANDB_USER
 from dermo_attributes.learning.training import load_model
 from dermo_attributes.results.figures import visualize_horizontal
 
@@ -25,7 +25,7 @@ def get_run_name_by_id(run_ids):
     attributes = []
     api = wandb.Api()
     for run_id in run_ids:
-        run = api.run("arno/lesion-attributes/" + run_id)
+        run = api.run(WANDB_USER + "/" + WANDB_PROJECT + "/" + run_id)
         attributes.append(*run.config["attributes"])
         run_names.append(run.name)
     return run_names, attributes
