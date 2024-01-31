@@ -3,6 +3,7 @@ from glob import glob
 
 from tqdm.contrib.concurrent import process_map
 import numpy as np
+import multiprocessing as mp
 
 from dermo_attributes.io.paths import processed_path, load_json, save_json, Splits, isic_path, Datatypes, str_to_id
 from dermo_attributes.io.images import get_isic_truth
@@ -85,7 +86,7 @@ def make_class_labels_dict(split=Splits.TRAIN):
     """
     id_list = get_isic_split(split)
     class_dict = {}
-    class_data = process_map(find_class_labels, id_list, repeat(split), chunksize=1)
+    class_data = process_map(find_class_labels, id_list, repeat(split), chunksize=1, max_workers=mp.cpu_count() - 2)
     for class_str, idx in class_data:
         if class_str not in class_dict.keys():
             class_dict[class_str] = [idx]

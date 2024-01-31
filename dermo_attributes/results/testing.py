@@ -51,7 +51,7 @@ def run_tests(run_ids):
     predictions = np.moveaxis(predictions, 0, 3)
     crop_data = read_crop_data("crop_512")
 
-    pred_list = process_map(prepare_pred, predictions, [crop_data[str(idx)] for idx in id_list], chunksize=1)
+    pred_list = process_map(prepare_pred, predictions, [crop_data[str(idx)] for idx in id_list], chunksize=1, max_workers=mp.cpu_count() - 2)
     gt_list = process_map(prepare_gt, id_list, repeat(attributes), chunksize=1)
 
     pred_list = np.array(pred_list)
