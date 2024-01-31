@@ -66,3 +66,7 @@ Run a gridsearch sweep for loss parameters and oversampling method (Add --help t
 python main.py sweep
 ```
 
+Calculate final ISIC test scores for models given their wandb index
+```
+python main.py test --idx model_id
+```
