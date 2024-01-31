@@ -7,6 +7,6 @@ RUN git clone https://github.com/arnohe/dermoscopic-attribute-detection.git
 WORKDIR dermoscopic-attribute-detection
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-ADD /data/ISIC /data/ISIC
-ADD /data/processed /data/processed
+ADD /data/ISIC ./data/ISIC
+ADD /data/processed ./data/processed
 # RUN git pull
