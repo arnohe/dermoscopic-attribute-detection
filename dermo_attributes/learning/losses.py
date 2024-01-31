@@ -7,6 +7,9 @@ paper: https://doi.org/10.1109/CIBCB48159.2020.9277638
 
 source: https://github.com/JunMa11/SegLoss
 paper: https://doi.org/10.1016/j.media.2021.102035
+
+Note the parameter gamma has been modified after writing my thesis to now match: 
+paper:  Unified Focal loss (https://doi.org/10.1016/j.compmedimag.2021.102026)
 """
 
 
