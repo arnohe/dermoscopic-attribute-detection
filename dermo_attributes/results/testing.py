@@ -4,6 +4,8 @@ import wandb
 import pickle
 import numpy as np
 from itertools import repeat
+import multiprocessing as mp
+
 from tqdm.contrib.concurrent import process_map
 
 from dermo_attributes.io.paths import Splits
@@ -31,15 +33,17 @@ def get_run_name_by_id(run_ids):
     return run_names, attributes
 
 
-def run_tests(run_ids):
+def run_tests(run_ids, dataset_name="crop_512"):
     """
-    calculate test scores for each attribute and mean
-    models given by their run id
+    Calculate test scores to compare to ISIC competition
+    Scoring is done after uncropping and standardizing size
+    Models for each attribute are given by their run id
+    Returns test scores for each attribute and appends the mean
     """
     run_names, attributes = get_run_name_by_id(run_ids)
 
-    id_list = get_ids("crop_512", Splits.TRAIN, [0])
-    dataset = load_numpy_data("crop_512", attributes, id_list, Splits.TRAIN)
+    id_list = get_ids(dataset_name, Splits.TEST, [0])
+    dataset = load_numpy_data(dataset_name, attributes, id_list, Splits.TEST)
 
     predictions = []
     for i, run_name in enumerate(run_names):
@@ -49,10 +53,11 @@ def run_tests(run_ids):
     predictions = np.array(predictions, dtype=np.float32)
     predictions = predictions.squeeze(axis=4)
     predictions = np.moveaxis(predictions, 0, 3)
-    crop_data = read_crop_data("crop_512")
+    crop_data = read_crop_data(dataset_name)
 
-    pred_list = process_map(prepare_pred, predictions, [crop_data[str(idx)] for idx in id_list], chunksize=1, max_workers=mp.cpu_count() - 2)
-    gt_list = process_map(prepare_gt, id_list, repeat(attributes), chunksize=1)
+    pred_list = process_map(prepare_pred, predictions, [crop_data[str(idx)] for idx in id_list], chunksize=1,
+                            max_workers=mp.cpu_count() - 2)
+    gt_list = process_map(prepare_gt, id_list, repeat(attributes), chunksize=1, max_workers=mp.cpu_count() - 2)
 
     pred_list = np.array(pred_list)
     gt_list = np.array(gt_list)
@@ -72,7 +77,7 @@ def prepare_gt(isic_id, attributes):
     """
     function to apply processing of ground truth in parallel
     """
-    return scale(get_isic_truth(isic_id, Splits.TRAIN, attributes), size=512)
+    return scale(get_isic_truth(isic_id, Splits.TEST, attributes), size=512)
 
 
 def cumulative_jaccard(gt, pred):
@@ -85,7 +90,7 @@ def cumulative_jaccard(gt, pred):
         fn = np.count_nonzero(np.logical_and(gt[..., i] == 1, pred[..., i] == 0))
         fp = np.count_nonzero(np.logical_and(gt[..., i] == 0, pred[..., i] == 1))
         scores.append(tp / (tp + fn + fp))
-    scores.append(n.array(scores).mean())
+    scores.append(np.array(scores).mean())
     return scores
 
 
@@ -109,7 +114,7 @@ def uncrop(pred, crop_data):
     return canvas
 
 
-def make_test_images(run_ids):
+def make_test_images(run_ids, dataset_name="crop_512"):
     """
     create a visualisation showing a prediction for each model
     models are given by their run id
@@ -119,7 +124,7 @@ def make_test_images(run_ids):
     run_names, attributes = get_run_name_by_id(run_ids)
 
     id_list = [isic_examples[a] for a in attributes]
-    dataset = load_numpy_data("crop_512", attributes, id_list, Splits.VALIDATION)
+    dataset = load_numpy_data(dataset_name, attributes, id_list, Splits.VALIDATION)
 
     predictions = []
     for i, run_name in enumerate(run_names):

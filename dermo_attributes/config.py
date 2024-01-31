@@ -1,7 +1,7 @@
 import os
 from argparse import ArgumentParser
 
-WANDB_PROJECT = "dermoscopic-attribute-detection"
+WANDB_PROJECT = "lesion-attributes"
 WANDB_USER = "arno"
 BASE_FOLDER = os.getenv('BASE_FOLDER', "data")  # points to where data is stored (if in a different location)
 
@@ -204,3 +204,15 @@ def setup_alpha_gamma_defaults(args):
             raise ValueError("bad input for loss function")
 
     return loss, alpha, gamma
+
+
+def test_arguments():
+    # idx for reference
+    # best_tversky = ["1d5do82w", "gj7umvnc", "3hzrhmt5", "mtl9gfbi", "1p0fs67i"]
+    # best_crossentropy = ["1kneet9g", "6a8kdbri", "366b6soy", "21ihgwob", "3466ju2v"]
+    parser = ArgumentParser(description='Calculate ISIC test scores')
+    parser.add_argument('test')
+    parser.add_argument('--idx', nargs='+', type=str,
+                        default=["1d5do82w", "gj7umvnc", "3hzrhmt5", "mtl9gfbi", "1p0fs67i"],
+                        help='list with wandb run_id of each model to test')
+    return parser.parse_args()
