@@ -50,7 +50,7 @@ docker build -t dermo-attributes .
   
 Run the docker container interactively
 ```
-docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti dermo-attributes
+docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -ti -e WANDB_API_KEY=$YOUR_KEY dermo-attributes
 ```
 
 ### Model training
