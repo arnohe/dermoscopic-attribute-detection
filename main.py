@@ -1,4 +1,3 @@
-from itertools import product
 import sys
 
 from dermo_attributes.config import preprocess_arguments, training_config, sweep_config, test_arguments, \

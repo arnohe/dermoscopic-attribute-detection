@@ -125,13 +125,7 @@ def get_raw_results():
 
     rows = []
     for run in runs:
-        print(run.id)
-        if run.id == "1d5do82w":
-            best = 46
-        elif run.id == "jx62n5vf":
-            best = 25
-        else:
-            best = run.summary["best_epoch"]
+        best = run.summary["best_epoch"]
         run_results = run.history().loc[[best]].to_dict(orient="list")
         row_conf = [run.config[conf] for conf in config]
         row_conf[-1] = row_conf[-1][0]
