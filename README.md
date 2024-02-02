@@ -72,8 +72,6 @@ Use --metric to change the metric
 ```
 python main.py validation
 ```
-Create image with  image
-
 Calculate final ISIC test scores for models given their wandb index\
 Also saves an image output with example validation segmentations to data/results
 ```
