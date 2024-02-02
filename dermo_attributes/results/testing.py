@@ -11,7 +11,7 @@ from tqdm.contrib.concurrent import process_map
 from dermo_attributes.io.paths import Splits
 from dermo_attributes.io.preprocess import read_crop_data
 from dermo_attributes.io.dataset import load_numpy_data, get_ids
-from dermo_attributes.io.images import threshold, get_isic_truth
+from dermo_attributes.io.images import threshold, get_isic_truth, rgb_to_bgr
 
 from dermo_attributes.config import ATTRIBUTE_NAMES, WANDB_PROJECT, WANDB_USER
 from dermo_attributes.learning.training import load_model
@@ -114,7 +114,7 @@ def uncrop(pred, crop_data):
     return canvas
 
 
-def make_test_images(run_ids, dataset_name="crop_512"):
+def make_test_images(run_ids, filename, dataset_name="crop_512"):
     """
     create a visualisation showing a prediction for each model
     models are given by their run id
@@ -138,8 +138,7 @@ def make_test_images(run_ids, dataset_name="crop_512"):
 
     viz = visualize_horizontal(im, gt, predictions, [ATTRIBUTE_NAMES[k].replace("_", " ") for k in attributes])
 
-    return viz
-
+    cv2.imwrite(filename, rgb_to_bgr(viz))
 
 def make_test_predictions(run_name, dataset):
     """

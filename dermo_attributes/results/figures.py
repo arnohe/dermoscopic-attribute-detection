@@ -25,7 +25,6 @@ def visualize_horizontal(ims, truth, pred, attribute_names):
     contour - heatmap overlay - overlap
     layout is horizontal
     """
-    print(truth.shape)
     ncols = truth.shape[0]
     fig, ax = plt.subplots(nrows=3, ncols=ncols, figsize=(12, 6))
     fig.tight_layout()

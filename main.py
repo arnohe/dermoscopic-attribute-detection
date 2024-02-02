@@ -10,9 +10,8 @@ from dermo_attributes.io.download_dataset import download_dataset as download_da
 from dermo_attributes.learning.sweep import search
 from dermo_attributes.learning.training import train_unet
 from dermo_attributes.results.figures import make_all_heat_plots, make_bar_plots
-from dermo_attributes.results.tables import print_formatted_table, get_best_runs, get_raw_results, table_all, \
-    table_for_overview, table_for_best, get_multi_index_results
-from dermo_attributes.results.testing import run_tests
+from dermo_attributes.results.tables import print_formatted_table
+from dermo_attributes.results.testing import run_tests, make_test_images
 
 
 def download_dataset():
@@ -44,18 +43,10 @@ def validation_results():
     print_formatted_table()
 
 
-# def image_main():
-#     best_tversky = ["1d5do82w", "gj7umvnc", "3hzrhmt5", "mtl9gfbi", "1p0fs67i"]
-#     best_crossentropy = ["1kneet9g", "6a8kdbri", "366b6soy", "21ihgwob", "3466ju2v"]
-#     cv2.imwrite("best_tversky_outputs_horizontal.png", rgb_to_bgr(make_test_images(best_tversky)))
-#     cv2.imwrite("best_focal_outputs_horizontal.png", rgb_to_bgr(make_test_images(best_crossentropy)))
-#
-#
-
-
 def isic_test_results():
     args = test_arguments()
     print("Jaccard scores:", run_tests(args.idx))
+    make_test_images(args.idx, "data/results/output_examples.png")
 
 
 if __name__ == "__main__":
