@@ -57,13 +57,13 @@ def table_for_overview(df, metric_name="crisp_iou"):
     """
     bce = table_for_selection(df, 0.5, 0, "binary focal loss", metric_name, "cross entropy")
     dl = table_for_selection(df, 0.5, 1, "focal tversky loss", metric_name, "dice loss")
-    lcdl = table_for_selection(df, 0.5, -1, "log cosh tversky loss", metric_name, "log cosh dice loss")
+    # lcdl = table_for_selection(df, 0.5, -1, "log cosh tversky loss", metric_name, "log cosh dice loss")
     wce = table_for_selection(df, None, 0, "binary focal loss", metric_name, "weighted cross entropy")
     tl = table_for_selection(df, None, 1, "focal tversky loss", metric_name, "tversky loss")
     ufl = table_for_selection(df, 0.5, None, "binary focal loss", metric_name, "unweighted focal loss")
     fdl = table_for_selection(df, 0.5, None, "focal tversky loss", metric_name, "focal dice loss")
 
-    rdf = pd.concat([bce, dl, lcdl, wce, tl, ufl, fdl])
+    rdf = pd.concat([bce, dl, wce, tl, ufl, fdl])
     rdf = rdf.sort_index()
     return rdf
 
@@ -117,6 +117,7 @@ def get_raw_results():
     if os.path.exists("data/results/raw_results_dataframe.pkl"):
         return pd.read_pickle("data/results/raw_results_dataframe.pkl")
 
+    print("Grabbing results from wandb..")
     api = wandb.Api()
     runs = api.runs(WANDB_USER + "/" + WANDB_PROJECT)
     metrics = ["val_" + j + "_" + i for i, j in product(["iou", "recall", "precision"], ["fuzzy", "crisp", "class"])]
@@ -160,9 +161,12 @@ def get_multi_index_results(metric="crisp_iou"):
     return df
 
 
-def print_formatted_table():
+def print_formatted_table(metric="crisp_iou"):
+    """
+    prints a nicely formatted version of table_for_best with averages
+    """
     set_display_size()
-    df = add_averages(table_for_best(get_multi_index_results())).round(5)
+    df = add_averages(table_for_best(get_multi_index_results(metric))).round(5)
     loss_order = {"cross entropy": 0,
                   "weighted cross entropy": 1,
                   "binary focal loss": 3,

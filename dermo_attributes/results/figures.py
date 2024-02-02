@@ -10,6 +10,7 @@ from matplotlib.patches import Patch
 from matplotlib.colors import hsv_to_rgb
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
+from dermo_attributes.config import ATTRIBUTE_NAMES
 from dermo_attributes.results.tables import get_multi_index_results, add_averages, table_all
 from dermo_attributes.io.images import visualize_contours, visualize_matrix, visualize_probability
 
@@ -144,9 +145,6 @@ def visualize_vertical(ims, truth, pred, attribute_names):
 
 
 def make_all_heat_plots(metric="crisp_iou", vertical=True):
-    """
-
-    """
     df = get_multi_index_results(metric)
     df.columns = df.columns.droplevel(0)
     loss_list = df.index.get_level_values("loss").unique().values
@@ -175,7 +173,7 @@ def full_heat_plot(df, loss_name, results_to_plot, metric="crisp_iou", vertical=
     fig, ax = plt.subplots(height, width, figsize=(width * fig_size[0], height * fig_size[1]), constrained_layout=True)
 
     min_values = [0, 0, 0, 0, 0]
-    max_values = [0.363, 0.178, 0.315, 0.553, 0.192]
+    max_values = [df[a.replace("_", " ")].max() for a in ATTRIBUTE_NAMES]
     for i, attribute_name in enumerate(attribute_name_list):
         data = results_to_plot[(loss_name, attribute_name)]
 
@@ -213,7 +211,7 @@ def full_heat_plot(df, loss_name, results_to_plot, metric="crisp_iou", vertical=
                 ax2.set_title("balanced")
 
     orientation_string = "vertical" if vertical else "horizontal"
-    plt.savefig("data/results/plot_" + orientation_string + "_heatmap_" + loss_name + "_" + metric + ".pdf",
+    plt.savefig("data/results/heatplot_" + loss_name.replace(" ", "-") + "_" + metric + ".pdf",
                 bbox_inches="tight")
 
 
@@ -315,7 +313,7 @@ def make_bar_plots(metric="crisp_iou"):
               frameon=False, bbox_to_anchor=(0.1, 1.2), ncol=4, handletextpad=0.5,
               handlelength=1.0, columnspacing=-0.5, loc="upper left", fontsize=10)
 
-    plt.savefig('data/results/plot_bars_' + metric + '.pdf', bbox_inches="tight")
+    plt.savefig('data/results/barplot_' + metric + '.pdf', bbox_inches="tight")
 
 
 def get_loss_names():

@@ -205,6 +205,15 @@ def setup_alpha_gamma_defaults(args):
     return loss, alpha, gamma
 
 
+def validation_arguments():
+    parser = ArgumentParser(description='Create plots and prints a table of the validation scores. Plots saved as pdf')
+    parser.add_argument('validation')
+    parser.add_argument('--metric', type=str,
+                        default="crisp_iou",
+                        help='9 possible metrics. Combinations: <fuzzy/crisp/class>_<iou/recall/precision>')
+    return parser.parse_args()
+
+
 def test_arguments():
     # idx for reference
     # best_tversky = ["1d5do82w", "gj7umvnc", "3hzrhmt5", "mtl9gfbi", "1p0fs67i"]
