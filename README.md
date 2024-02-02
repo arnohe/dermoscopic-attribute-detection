@@ -65,6 +65,11 @@ Run a gridsearch sweep for loss parameters and oversampling method (Add --help t
 ```
 python main.py sweep
 ```
+Create heatplots of the gridsearch validation scores\
+The plots are saved to data/results
+```
+python main.py validation
+```
 
 Calculate final ISIC test scores for models given their wandb index
 ```
