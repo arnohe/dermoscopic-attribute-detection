@@ -66,7 +66,7 @@ Run a gridsearch sweep for loss parameters and oversampling method (Add --help t
 python main.py sweep
 ```
 Process validation results of the gridsearch\
-Table summary of best paramenters is printed\
+Table summary of best parameters is printed\
 Barplot and heatplots are saved to data/results\
 Use --metric to change the metric
 ```
