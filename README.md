@@ -11,6 +11,7 @@ The goal is the detection of certain structures in dermoscopic images, with the 
 This is achieved through machine learning using a UNet-architecture with a compact encoder (EfficientNetV2) to segment the structures.
 The main challenges are related to problems with the labelled dataset, including heavy data imbalance.
 To address this two families of loss functions and an oversampling technique are evaluated.
+To improve interpretability, heatmaps of the model output are produced.
 
 The following image is an example of the model output for the five different structures from left to right.
 The middle row shows a heatmap of the raw model output.
