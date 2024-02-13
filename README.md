@@ -8,7 +8,7 @@ This project is based on the data from the [ISIC 2018](https://challenge.isic-ar
 The project makes use of my [Weights & Biases project](https://wandb.ai/arno/lesion-attributes) to store runs and models.
 
 The goal is the detection of certain structures in dermoscopic images, with the aim of aiding in the diagnosis of melanoma.
-This is achieved through machine learning using a UNet-architecture with a compact encoder to segment the structures.
+This is achieved through machine learning using a UNet-architecture with a compact encoder (EfficientNetV2) to segment the structures.
 The main challenges are related to problems with the labelled dataset, including heavy data imbalance.
 To address this two families of loss functions and an oversampling technique are evaluated.
 
