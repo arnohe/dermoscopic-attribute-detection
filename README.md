@@ -17,7 +17,7 @@ The following image is an example of the model output for the five different str
 The middle row shows a heatmap of the raw model output.
 The top and bottom row show a comparison of the produced segmentation masks to the ground truth.
 <p align="center">
-<img src="https://github.com/arnohe/arnohe.github.io/blob/main/thesis_BFL_output.png?raw=true" width="800">
+<img src="https://github.com/arnohe/dermoscopic-attribute-detection/blob/main/thesis_BFL_output.png?raw=true" width="800">
 </p>
 
 
